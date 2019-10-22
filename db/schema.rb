@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2019_10_21_040835) do
     t.bigint "hostname_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["dns_id", "hostname_id"], name: "index_dns_records_on_dns_id_and_hostname_id", unique: true
     t.index ["dns_id"], name: "index_dns_records_on_dns_id"
     t.index ["hostname_id"], name: "index_dns_records_on_hostname_id"
   end

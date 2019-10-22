@@ -6,5 +6,6 @@ class CreateDNSRecords < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
+    add_index :dns_records, [:dns_id, :hostname_id], unique: true
   end
 end
