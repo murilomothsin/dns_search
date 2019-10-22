@@ -1,24 +1,34 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+DNS API
 
-Things you may want to cover:
+# Docker configuration
 
-* Ruby version
+1. Install docker (https://docs.docker.com/install/)
+2. run `docker-compose build`
+3. run `docker volume create --name=postgres_database`
+4. run `docker-compose up`
+5. run `docker-compose run web rake db:create`
+6. run `docker-compose run web rake db:migrate`
+7. run `docker-compose run web rake db:seed`
 
-* System dependencies
 
-* Configuration
+# cUrl requests
 
-* Database creation
+##GET
 
-* Database initialization
+```
+curl -XGET -d 'included[]=ipsum.com&included[]=dolor.com&excluded[]=sit.com&page=1' 'http://localhost:3000/dns_records'
+```
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+##POST
+```
+curl -XPOST -H "Content-type: application/json" -d '{"dns_records": 
+ {
+   "ip_address":"5.5.5.5",
+   "hostnames_attributes": [{
+     "hostname": "sit.com"
+   }]
+ }
+}' 'http://localhost:3000/dns_records'
+```
